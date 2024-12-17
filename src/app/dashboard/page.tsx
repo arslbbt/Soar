@@ -7,17 +7,26 @@ import WeeklyActivity from '@/components/dashboard/WeeklyActivity'
 import ExpenseStatistics from '@/components/dashboard/ExpenseStatistics'
 import QuickTransfer from '@/components/dashboard/QuickTransfer'
 import BalanceHistory from '@/components/dashboard/BalanceHistory'
+import RecentTransactions from '@/components/dashboard/RecentTransactions'
 
 export default function DashboardPage(): React.JSX.Element {
   return (
     <DashboardLayout>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="space-y-6">
+      <div className="flex flex-col space-y-6">
+        {/* First Row */}
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
           <MyCards />
-          <WeeklyActivity />
+          <RecentTransactions />
         </div>
-        <div className="space-y-6">
+
+        {/* Second Row */}
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+          <WeeklyActivity />
           <ExpenseStatistics />
+        </div>
+
+        {/* Third Row */}
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
           <QuickTransfer />
           <BalanceHistory />
         </div>

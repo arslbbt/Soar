@@ -32,3 +32,12 @@ export interface QuickTransferUser {
   role: string
   avatar: string
 } 
+
+export interface Transaction {
+  id: string
+  title: string
+  date: string
+  amount: number
+  type: 'deposit' | 'withdrawal'
+  icon: string
+}
