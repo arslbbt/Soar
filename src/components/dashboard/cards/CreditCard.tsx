@@ -47,10 +47,6 @@ export default function CreditCard(): React.JSX.Element {
   return (
     <div className="bg-white p-6 rounded-[20px]">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-lg font-semibold text-[#2B3674]">My Cards</h2>
-        <button className="text-sm text-[#4318FF] hover:text-[#2B3674] transition-colors">
-          See All
-        </button>
       </div>
       <Suspense fallback={<CreditCardSkeleton />}>
         <CreditCardContent />
