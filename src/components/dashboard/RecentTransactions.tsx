@@ -85,14 +85,15 @@ function TransactionsContent() {
 
 export default function RecentTransactions(): React.JSX.Element {
   return (
-    <div className="bg-white p-6 rounded-[20px]">
+    <div className="rounded-[20px]">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-lg font-semibold text-[#2B3674]">Recent Transaction</h2>
-        <button className="text-sm text-[#4318FF]">See All</button>
       </div>
-      <Suspense fallback={<TransactionLoadingSkeleton />}>
-        <TransactionsContent />
-      </Suspense>
+      <div className='bg-white p-6 rounded-[20px]'>
+        <Suspense fallback={<TransactionLoadingSkeleton />}>
+            <TransactionsContent />
+        </Suspense>
+      </div>
     </div>
   )
 } 
