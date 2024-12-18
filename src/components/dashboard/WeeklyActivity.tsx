@@ -6,13 +6,13 @@ import { WeeklyActivityData } from '../../types/dashboard'
 import { formatCurrency } from '../../utils/format'
 
 const data: WeeklyActivityData[] = [
-  { day: 'Mon', deposit: 2400, withdraw: 1400 },
-  { day: 'Tue', deposit: 1398, withdraw: 800 },
-  { day: 'Wed', deposit: 9800, withdraw: 2400 },
-  { day: 'Thu', deposit: 3908, withdraw: 2000 },
-  { day: 'Fri', deposit: 4800, withdraw: 3800 },
-  { day: 'Sat', deposit: 3800, withdraw: 2400 },
-  { day: 'Sun', deposit: 4300, withdraw: 2100 }
+  { day: 'Sat', deposit: 200, withdraw: 450 },
+  { day: 'Sun', deposit: 110, withdraw: 320 },
+  { day: 'Mon', deposit: 260, withdraw: 300 },
+  { day: 'Tue', deposit: 350, withdraw: 450 },
+  { day: 'Wed', deposit: 230, withdraw: 150 },
+  { day: 'Thu', deposit: 230, withdraw: 370 },
+  { day: 'Fri', deposit: 320, withdraw: 370 }
 ]
 
 interface CustomTooltipProps {
@@ -51,7 +51,7 @@ export default function WeeklyActivity(): React.JSX.Element {
         </div>
       </div>
 
-      <div className="h-[300px] w-full bg-white p-6 rounded-2xl">
+      <div className="h-[322px] w-full bg-white p-6 rounded-2xl">
         <div className="flex items-center justify-end space-x-4">
             <div className="flex items-center space-x-2">
               <div className="w-4 h-4 rounded-full bg-[#396AFF]" />
@@ -67,31 +67,38 @@ export default function WeeklyActivity(): React.JSX.Element {
           <BarChart
             data={data}
             margin={{ top: 20, right: 0, left: -20, bottom: 0 }}
+            barGap={10}  // Space between bars in the same group
+            barCategoryGap={25} // Space between different groups
           >
             <XAxis 
               dataKey="day" 
               axisLine={false}
               tickLine={false}
-              tick={{ fill: '#A3AED0' }}
+              tick={{ fill: '#A3AED0', fontSize: 12 }}
+              dy={10}
             />
             <YAxis 
               axisLine={false}
               tickLine={false}
-              tick={{ fill: '#A3AED0' }}
-              tickFormatter={(value) => `$${value}`}
+              tick={{ fill: '#A3AED0', fontSize: 12 }}
+              tickFormatter={(value) => value}
+              tickCount={6}
             />
-            <Tooltip content={<CustomTooltip />} />
-            <Bar 
-              dataKey="deposit" 
-              fill="#396AFF" 
-              radius={[4, 4, 0, 0]}
-              maxBarSize={45}
+            <Tooltip 
+              content={<CustomTooltip />}
+              cursor={{ fill: 'transparent' }}
             />
             <Bar 
               dataKey="withdraw" 
-              fill="#000000" 
-              radius={[4, 4, 0, 0]}
-              maxBarSize={45}
+              fill="#00000"
+              radius={[20, 20, 0, 0]}
+              maxBarSize={12}
+            />
+            <Bar 
+              dataKey="deposit" 
+              fill="#396AFF"
+              radius={[20, 20, 0, 0]}
+              maxBarSize={12}
             />
           </BarChart>
         </ResponsiveContainer>

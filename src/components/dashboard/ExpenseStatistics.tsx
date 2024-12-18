@@ -18,7 +18,7 @@ export default function ExpenseStatistics(): React.JSX.Element {
         <h2 className="text-lg font-semibold text-primary-dark">Expense Statistics</h2>
       </div>
 
-      <div className="h-[300px] w-full bg-white p-6 rounded-2xl">
+      <div className="h-[322px] w-full bg-white p-6 rounded-2xl">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
