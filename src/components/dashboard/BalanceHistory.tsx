@@ -41,7 +41,7 @@ export default function BalanceHistory(): React.JSX.Element {
         </div>
       </div>
 
-      <div className="h-[300px] w-full bg-white p-6 rounded-2xl">
+      <div className="h-[276px] w-full bg-white p-6 rounded-2xl">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart 
             data={data}
