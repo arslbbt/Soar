@@ -24,6 +24,8 @@ export interface ExpenseData {
   name: string
   value: number
   color: string
+  startAngle: number
+  endAngle: number
 }
 
 export interface QuickTransferUser {
