@@ -28,20 +28,14 @@ const CustomTooltip = ({ active, payload }: any) => {
 
 export default function BalanceHistory(): React.JSX.Element {
   return (
-    <div className="bg-white p-6 rounded-2xl">
+    <div className="">
       <div className="flex justify-between items-center mb-6">
         <div>
           <h2 className="text-lg font-semibold text-primary-dark">Balance History</h2>
-          <p className="text-sm text-secondary">Your balance trend</p>
         </div>
-        <select className="text-sm text-primary-dark border border-gray-200 rounded-lg px-3 py-2">
-          <option>Last 6 months</option>
-          <option>Last year</option>
-          <option>All time</option>
-        </select>
       </div>
 
-      <div className="h-[200px]">
+      <div className="h-[300px] w-full bg-white p-6 rounded-2xl">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data}>
             <XAxis 

@@ -44,27 +44,26 @@ const CustomTooltip = ({ active, payload }: CustomTooltipProps) => {
 
 export default function WeeklyActivity(): React.JSX.Element {
   return (
-    <div className="bg-white p-6 rounded-2xl">
+    <div className="">
       <div className="flex justify-between items-center mb-6">
         <div>
           <h2 className="text-lg font-semibold text-primary-dark">Weekly Activity</h2>
-          <p className="text-sm text-secondary">Your weekly money flow</p>
-        </div>
-        
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2">
-            <div className="w-3 h-3 rounded-full bg-primary" />
-            <span className="text-sm text-secondary">Deposit</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-3 h-3 rounded-full bg-success" />
-            <span className="text-sm text-secondary">Withdraw</span>
-          </div>
         </div>
       </div>
 
-      <div className="h-[300px] w-full">
+      <div className="h-[300px] w-full bg-white p-6 rounded-2xl">
+        <div className="flex items-center justify-end space-x-4">
+            <div className="flex items-center space-x-2">
+              <div className="w-4 h-4 rounded-full bg-[#396AFF]" />
+              <span className="text-sm text-secondary">Deposit</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-4 h-4 rounded-full bg-black" />
+              <span className="text-sm text-secondary">Withdraw</span>
+            </div>
+        </div>
         <ResponsiveContainer width="100%" height="100%">
+          
           <BarChart
             data={data}
             margin={{ top: 20, right: 0, left: -20, bottom: 0 }}
@@ -84,13 +83,13 @@ export default function WeeklyActivity(): React.JSX.Element {
             <Tooltip content={<CustomTooltip />} />
             <Bar 
               dataKey="deposit" 
-              fill="#4318FF" 
+              fill="#396AFF" 
               radius={[4, 4, 0, 0]}
               maxBarSize={45}
             />
             <Bar 
               dataKey="withdraw" 
-              fill="#05CD99" 
+              fill="#000000" 
               radius={[4, 4, 0, 0]}
               maxBarSize={45}
             />

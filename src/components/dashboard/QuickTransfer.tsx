@@ -20,14 +20,13 @@ export default function QuickTransfer(): React.JSX.Element {
   const [selectedAmount, setSelectedAmount] = useState<number>(0)
 
   return (
-    <div className="bg-white p-6 rounded-2xl">
+    <div className="">
       <div className="mb-6">
         <h2 className="text-lg font-semibold text-primary-dark">Quick Transfer</h2>
-        <p className="text-sm text-secondary">Send money quickly to your contacts</p>
       </div>
 
       {/* Users */}
-      <div className="flex space-x-4 overflow-x-auto pb-4">
+      <div className="flex space-x-4 overflow-x-auto pb-4 w-full bg-white p-6 rounded-2xl h-[300px]">
         {users.map((user) => (
           <motion.button
             key={user.id}
@@ -61,44 +60,6 @@ export default function QuickTransfer(): React.JSX.Element {
           </motion.button>
         ))}
       </div>
-
-      {/* Amount Selection */}
-      <div className="mt-6">
-        <p className="text-sm font-medium text-primary-dark mb-3">Select Amount</p>
-        <div className="grid grid-cols-3 gap-3">
-          {amounts.map((amount) => (
-            <motion.button
-              key={amount}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => setSelectedAmount(amount)}
-              className={cn(
-                "py-2 px-4 rounded-xl text-sm font-medium transition-colors",
-                selectedAmount === amount 
-                  ? "bg-primary text-white"
-                  : "bg-gray-50 text-primary-dark hover:bg-gray-100"
-              )}
-            >
-              ${amount}
-            </motion.button>
-          ))}
-        </div>
-      </div>
-
-      {/* Transfer Button */}
-      <motion.button
-        whileHover={{ scale: 1.01 }}
-        whileTap={{ scale: 0.99 }}
-        className={cn(
-          "w-full mt-6 py-3 rounded-xl text-white font-medium transition-opacity",
-          selectedUser && selectedAmount 
-            ? "bg-primary opacity-100"
-            : "bg-primary opacity-50 cursor-not-allowed"
-        )}
-        disabled={!selectedUser || !selectedAmount}
-      >
-        Transfer Now
-      </motion.button>
     </div>
   )
 } 

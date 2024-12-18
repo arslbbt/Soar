@@ -30,10 +30,16 @@ export default function DashboardPage(): React.JSX.Element {
         </div>
 
         {/* Third Row */}
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-          <QuickTransfer />
-          <BalanceHistory />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div className="lg:col-span-5 xl:col-span-4 ">
+            <QuickTransfer />
+          </div>
+          <div className="lg:col-span-7 xl:col-span-8">
+            <BalanceHistory />
+          </div>
         </div>
+
+
       </div>
     </DashboardLayout>
   )
