@@ -3,6 +3,7 @@
 import React, { Suspense } from 'react'
 import { formatCurrency } from '../../utils/format'
 import { Transaction } from '../../types/dashboard'
+import Image from 'next/image'
 
 const recentTransactions: Transaction[] = [
   {
@@ -11,7 +12,7 @@ const recentTransactions: Transaction[] = [
     date: '28 January 2021',
     amount: -850,
     type: 'withdrawal',
-    icon: '💳'
+    icon: '/images/deposit_card.svg'
   },
   {
     id: '2',
@@ -19,7 +20,7 @@ const recentTransactions: Transaction[] = [
     date: '25 January 2021',
     amount: 2500,
     type: 'deposit',
-    icon: '🅿️'
+    icon: '/images/deposit_paypal.svg'
   },
   {
     id: '3',
@@ -27,7 +28,7 @@ const recentTransactions: Transaction[] = [
     date: '21 January 2021',
     amount: 5400,
     type: 'deposit',
-    icon: '👤'
+    icon: '/images/dollar.svg'
   }
 ]
 
@@ -37,11 +38,15 @@ function TransactionItem({ transaction }: { transaction: Transaction }) {
   const amountPrefix = isNegative ? '' : '+'
 
   return (
-    <div className="flex items-center justify-between py-4 first:pt-0 last:pb-0">
+    <div className="flex items-center justify-between py-2 first:pt-0 last:pb-0">
       <div className="flex items-center space-x-4">
-        <div className="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-xl">
-          {transaction.icon}
-        </div>
+        <Image
+          src= {transaction.icon}
+          alt='credit-card'
+          width={55}
+          height={55}
+          className="object-contain"
+        />
         <div>
           <p className="text-[#2B3674] font-medium">{transaction.title}</p>
           <p className="text-sm text-[#A3AED0]">{transaction.date}</p>

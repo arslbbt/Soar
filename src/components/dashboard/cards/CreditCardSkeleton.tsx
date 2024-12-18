@@ -1,13 +1,13 @@
-
 import React from 'react'
 
 export function CreditCardSkeleton() {
-    return (
-      <div className="flex space-x-6 overflow-x-auto pb-4">
+  return (
+    <div className="relative">
+      <div className="flex space-x-4 md:space-x-6 overflow-x-auto no-scrollbar pb-4">
         {[1, 2].map((index) => (
           <div
             key={index}
-            className={`min-w-[380px] h-[220px] ${
+            className={`min-w-[300px] md:min-w-[340px] lg:min-w-[360px] xl:min-w-[380px] h-[200px] md:h-[220px] ${
               index === 1 ? 'bg-gray-100' : 'bg-gray-50'
             } animate-pulse rounded-[20px] p-6`}
           >
@@ -34,5 +34,6 @@ export function CreditCardSkeleton() {
           </div>
         ))}
       </div>
-    )
-  }
+    </div>
+  )
+}
