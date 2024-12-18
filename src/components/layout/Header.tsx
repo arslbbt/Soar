@@ -1,8 +1,10 @@
 'use client'
 
 import React from 'react'
-import { MagnifyingGlassIcon, Cog6ToothIcon, Bars3Icon, BellAlertIcon } from '@heroicons/react/24/outline'
+import { usePathname } from 'next/navigation'
+import { MagnifyingGlassIcon, Cog6ToothIcon, Bars3Icon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
+import { navigationItems } from './Nav'
 
 interface HeaderProps {
   onMenuClick: () => void
@@ -10,6 +12,10 @@ interface HeaderProps {
 }
 
 export default function Header({ onMenuClick, isMobileMenuOpen }: HeaderProps): React.JSX.Element {
+  const pathname = usePathname()
+  
+  const currentPage = navigationItems.find(item => item.href === pathname)?.name || 'Overview'
+
   return (
     <div className="sticky top-0 z-10 bg-white border-b border-gray-200">
       <div className="flex items-center justify-between px-4 py-4 lg:px-8">
@@ -22,7 +28,7 @@ export default function Header({ onMenuClick, isMobileMenuOpen }: HeaderProps): 
           >
             <Bars3Icon className="h-6 w-6" />
           </button>
-          <h1 className="text-2xl font-semibold text-primary-dark">Overview</h1>
+          <h1 className="text-2xl font-semibold text-primary-dark">{currentPage}</h1>
         </div>
         
         <div className="flex items-center space-x-4">
@@ -48,7 +54,7 @@ export default function Header({ onMenuClick, isMobileMenuOpen }: HeaderProps): 
             className="p-2 hover:bg-background rounded-full transition-colors"
             aria-label="Settings"
           >
-            <BellAlertIcon className="h-6 w-6 text-secondary" />
+            <Image src="/images/icons/bell.svg" alt="bell" width={20} height={20} />
           </button>
           
           <div className="h-10 w-10 rounded-full overflow-hidden bg-gray-200">

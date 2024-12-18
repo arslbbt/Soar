@@ -3,42 +3,14 @@
 import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { 
-  HomeIcon,
-  ArrowsRightLeftIcon,
-  WalletIcon,
-  CreditCardIcon,
-  ChartBarIcon,
-  BanknotesIcon,
-  WrenchScrewdriverIcon,
-  GiftIcon,
-  Cog6ToothIcon,
-} from '@heroicons/react/24/outline'
 import { cn } from '@/utils/cn'
 import Image from 'next/image'
+import { navigationItems } from './Nav'
 
 interface SidebarProps {
   isMobileMenuOpen: boolean
   onClose: () => void
 }
-
-interface NavItem {
-  name: string
-  href: string
-  icon: React.ForwardRefExoticComponent<React.SVGProps<SVGSVGElement>>
-}
-
-const navigation: NavItem[] = [
-  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
-  { name: 'Transactions', href: '/dashboard/transactions', icon: ArrowsRightLeftIcon },
-  { name: 'Accounts', href: '/dashboard/accounts', icon: WalletIcon },
-  { name: 'Credit Cards', href: '/dashboard/credit-cards', icon: CreditCardIcon },
-  { name: 'Investments', href: '/dashboard/investments', icon: ChartBarIcon },
-  { name: 'Loans', href: '/dashboard/loans', icon: BanknotesIcon },
-  { name: 'Services', href: '/dashboard/services', icon: WrenchScrewdriverIcon },
-  { name: 'My Privileges', href: '/dashboard/privileges', icon: GiftIcon },
-  { name: 'Settings', href: '/dashboard/settings', icon: Cog6ToothIcon },
-]
 
 export default function Sidebar({ isMobileMenuOpen, onClose }: SidebarProps): React.JSX.Element {
   const pathname = usePathname()
@@ -74,7 +46,7 @@ export default function Sidebar({ isMobileMenuOpen, onClose }: SidebarProps): Re
           </div>
 
           <nav className="space-y-1">
-            {navigation.map((item) => {
+            {navigationItems.map((item) => {
               const isActive = pathname === item.href
               return (
                 <Link
@@ -87,7 +59,16 @@ export default function Sidebar({ isMobileMenuOpen, onClose }: SidebarProps): Re
                       : "text-gray hover:bg-gray-light hover:text-black"
                   )}
                 >
-                  <item.icon className="h-5 w-5 mr-3" />
+                  <Image 
+                    src={`/images/icons/${item.icon}`} 
+                    alt={item.name} 
+                    width={20} 
+                    height={20} 
+                    className={cn(
+                      "mr-3 transition-colors",
+                      isActive ? "brightness-0" : "brightness-100 group-hover:brightness-0"
+                    )}
+                  />
                   {item.name}
                 </Link>
               )
