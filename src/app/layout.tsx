@@ -15,6 +15,14 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Soar",
   description: "Soar is a platform for managing your finances and tracking your expenses.",
+  icons: {
+    icon: '/images/logo.svg',
+    // You can also add different sizes
+    apple: [
+      { url: '/images/logo.svg' },
+      { url: '/images/logo.svg', sizes: '72x72', type: 'image/png' },
+    ],
+  },
 };
 
 export default function RootLayout({
