@@ -59,7 +59,7 @@ export default function Header({ onMenuClick, isMobileMenuOpen }: HeaderProps): 
           
           <div className="h-10 w-10 rounded-full overflow-hidden bg-gray-200">
             <Image
-              src="/images/avatars/person-1.svg"
+              src="/images/avatars/person-5.svg"
               alt="Profile"
               width={40}
               height={40}
