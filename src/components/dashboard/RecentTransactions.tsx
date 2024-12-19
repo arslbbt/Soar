@@ -35,7 +35,7 @@ const recentTransactions: Transaction[] = [
 function TransactionItem({ transaction }: { transaction: Transaction }) {
   const isNegative = transaction.amount < 0
   const amountColor = isNegative ? 'text-red-500' : 'text-green-500'
-  const amountPrefix = isNegative ? '' : '+'
+  const amountPrefix = isNegative ? '-' : '+'
 
   return (
     <div className="flex items-center justify-between py-2 first:pt-0 last:pb-0">

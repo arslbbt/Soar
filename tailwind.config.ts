@@ -29,7 +29,7 @@ export default {
           DEFAULT: '#05CD99',
         },
         background: {
-          DEFAULT: '#F4F7FE',
+          DEFAULT: '#F5F7FA',
         },
       },
     },
