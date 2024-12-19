@@ -102,13 +102,13 @@ export default function QuickTransfer(): React.JSX.Element {
       <div className="relative w-full bg-white p-6 rounded-2xl h-[276px] flex flex-col justify-center">
         <div 
           ref={scrollContainerRef}
-          className="flex space-x-3 mb-6 overflow-x-auto no-scrollbar"
+          className="flex space-x-3 mb-6 overflow-x-auto no-scrollbar md:w-[77%] w-[82%]"
         >
           {users.map((user) => (
             <div
               key={user.id}
               onClick={() => setSelectedUser(user.id)}
-              className="flex flex-col items-center min-w-[90px]"
+              className="flex flex-col items-center md:min-w-[100px] min-w-[85px]"
             >
               <div className="relative w-[70px] h-[70px] mb-2">
                 <Image
@@ -131,7 +131,7 @@ export default function QuickTransfer(): React.JSX.Element {
         {showLeftButton && (
           <button 
             onClick={scrollToPrev}
-            className="absolute left-0 top-[45%] transform -translate-y-1/2 bg-white shadow-lg rounded-full p-2 z-10 hover:bg-gray-50 transition-colors"
+            className="absolute left-0 top-[40%] transform -translate-y-1/2 bg-white shadow-lg rounded-full p-5 items-center z-10 hover:bg-gray-50 transition-colors"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -141,11 +141,9 @@ export default function QuickTransfer(): React.JSX.Element {
         {showRightButton && (
           <button 
             onClick={scrollToNext}
-            className="absolute right-0 top-[45%] transform -translate-y-1/2 bg-white shadow-lg rounded-full p-2 z-10 hover:bg-gray-50 transition-colors"
+            className="absolute md:right-10 right-5 top-[40%] transform -translate-y-1/2 bg-white shadow-lg rounded-full p-5 items-center z-10 hover:bg-gray-50 transition-colors"
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M9 18l6-6-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            <Image src="/images/icons/arrow-right.svg" alt="arrow-right" width={9} height={9} />
           </button>
         )}
 
