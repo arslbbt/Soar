@@ -19,7 +19,19 @@ const data = [
   { date: 'Dec', balance: 11000 }
 ]
 
-const CustomTooltip = ({ active, payload }: any) => {
+interface TooltipProps {
+  active?: boolean;
+  payload?: Array<{
+    value: number;
+    payload: {
+      date: string;
+      balance: number;
+    };
+  }>;
+  label?: string;
+}
+
+const CustomTooltip = ({ active, payload }: TooltipProps) => {
   if (active && payload && payload.length) {
     return (
       <div className="bg-white p-3 rounded-lg shadow-lg border border-gray-100">

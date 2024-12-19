@@ -20,7 +20,7 @@ export default function MyCards(): React.JSX.Element {
         <button className="text-sm text-[#4318FF]">See All</button>
       </div>
       <Suspense fallback={<CreditCardSkeleton />}>
-        <CreditCard />
+        <CreditCard card={card} />
       </Suspense>
     </div>
   )
