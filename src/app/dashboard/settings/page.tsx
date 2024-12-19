@@ -9,6 +9,7 @@ import toast from 'react-hot-toast'
 import Loader from '@/components/shared/Loader'
 import { useYupForm } from '@/hooks/useYupForm'
 import { settingsSchema, type SettingsFormData } from '@/schemas/settingsValidation'
+import ImageUpload from '@/components/ui/ImageUpload'
 
 const tabs = [
   { id: 'edit', label: 'Edit Profile' },
@@ -19,6 +20,7 @@ const tabs = [
 export default function SettingsPage(): React.JSX.Element {
   const [activeTab, setActiveTab] = useState('edit')
   const [isLoading, setIsLoading] = useState(false)
+  const [profileImage, setProfileImage] = useState('/images/avatars/person-5.svg')
 
   const { formData, errors, handleChange, validateForm } = useYupForm<SettingsFormData>(
     settingsSchema,
@@ -53,6 +55,18 @@ export default function SettingsPage(): React.JSX.Element {
     }
   };
 
+  const handleImageChange = async (file: File) => {
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      const imageUrl = URL.createObjectURL(file);
+      setProfileImage(imageUrl);
+      toast.success('Profile picture updated successfully!');
+    } catch (error) {
+      toast.error('Failed to update profile picture');
+    }
+  };
+
   return (
     <DashboardLayout>
       <div className="bg-white rounded-[20px] p-6">
@@ -80,22 +94,10 @@ export default function SettingsPage(): React.JSX.Element {
             <div className="flex flex-col md:flex-row gap-8">
               {/* Profile Image Column */}
               <div className="md:w-[200px] flex-shrink-0 flex justify-center">
-                <div className="relative w-24 h-24">
-                  <Image
-                    src="/images/avatars/person-5.svg"
-                    alt="Profile"
-                    fill
-                    className="rounded-full object-cover"
-                  />
-                  <button className="absolute bottom-0 right-0 p-2 bg-black rounded-full">
-                    <Image 
-                      src="/images/icons/pencil.svg" 
-                      alt="Edit" 
-                      width={16} 
-                      height={16} 
-                    />
-                  </button>
-                </div>
+                <ImageUpload
+                  currentImage={profileImage}
+                  onImageChange={handleImageChange}
+                />
               </div>
 
               {/* Form Column */}
