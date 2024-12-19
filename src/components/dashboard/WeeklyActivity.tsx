@@ -15,10 +15,16 @@ const data: WeeklyActivityData[] = [
   { day: 'Fri', deposit: 320, withdraw: 370 }
 ]
 
+interface TooltipPayloadItem {
+  name: string;
+  value: number;
+  color: string;
+}
+
 interface CustomTooltipProps {
-  active?: boolean
-  payload?: any[]
-  label?: string
+  active?: boolean;
+  payload?: TooltipPayloadItem[];
+  label?: string;
 }
 
 const CustomTooltip = ({ active, payload }: CustomTooltipProps) => {

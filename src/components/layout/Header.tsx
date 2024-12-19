@@ -8,10 +8,9 @@ import { navigationItems } from './Nav'
 
 interface HeaderProps {
   onMenuClick: () => void
-  isMobileMenuOpen: boolean
 }
 
-export default function Header({ onMenuClick, isMobileMenuOpen }: HeaderProps): React.JSX.Element {
+export default function Header({ onMenuClick }: HeaderProps): React.JSX.Element {
   const pathname = usePathname()
   
   const currentPage = navigationItems.find(item => item.href === pathname)?.name || 'Overview'

@@ -6,14 +6,7 @@ import { CardData } from '@/types/dashboard'
 import { CardInfo } from './CardInfo'
 import { CreditCardSkeleton } from './CreditCardSkeleton'
 
-const card: CardData = {
-  balance: 5756,
-  cardHolder: "Eddy Cusuma",
-  validThru: "12/22",
-  cardNumber: "3778 **** **** 1234"
-}
-
-function CreditCardContent() {
+function CreditCardContent({ card }: { card: CardData }) {
   return (
     <div className="relative">
       <div className="flex space-x-4 md:space-x-6 overflow-x-auto no-scrollbar pb-4">
@@ -42,10 +35,10 @@ function CreditCardContent() {
   )
 }
 
-export default function CreditCard(): React.JSX.Element {
+export default function CreditCard({ card }: { card: CardData }): React.JSX.Element {
   return (
     <Suspense fallback={<CreditCardSkeleton />}>
-      <CreditCardContent />
+      <CreditCardContent card={card} />
     </Suspense>
   )
 }
