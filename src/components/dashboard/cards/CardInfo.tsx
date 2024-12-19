@@ -55,7 +55,7 @@ export function CardInfo({ card, variant }: CardInfoProps) {
 
             <div style={footerStyle} className="mt-auto">
                 <div className="flex items-center justify-between p-4 md:p-6">
-                    <p className={`text-base md:text-[18px] ${textColor.primary} tracking-[0.2em] font-medium`}>
+                    <p className={`text-base md:text-[20px] ${textColor.primary} tracking-[0.05em] font-medium`}>
                         {card.cardNumber}
                     </p>
                     <Image
