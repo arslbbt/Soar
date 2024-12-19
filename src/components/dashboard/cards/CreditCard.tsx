@@ -14,7 +14,7 @@ function CreditCardContent({ card }: { card: CardData }) {
         <motion.div
           whileHover={{ scale: 1.02 }}
           transition={{ type: "spring", stiffness: 300 }}
-          className="min-w-[300px] md:min-w-[350px] lg:min-w-[330px] xl:min-w-[360px] h-[245px] md:h-[245px] rounded-[20px] relative overflow-hidden"
+          className="min-w-[300px] md:min-w-[350px] lg:min-w-[330px] xl:min-w-[360px] h-[206px] md:h-[245px] rounded-[20px] relative overflow-hidden"
           style={{
             background: 'linear-gradient(107.38deg, #5B5A6F 2.61%, #000000 101.2%)'
           }}
@@ -26,7 +26,7 @@ function CreditCardContent({ card }: { card: CardData }) {
         <motion.div
           whileHover={{ scale: 1.02 }}
           transition={{ type: "spring", stiffness: 300 }}
-          className="min-w-[300px] md:min-w-[350px] lg:min-w-[360px] xl:min-w-[360px] h-[245px] md:h-[245px] bg-white rounded-[20px] relative overflow-hidden shadow-sm border border-[#E9EDF7]"
+          className="min-w-[300px] md:min-w-[350px] lg:min-w-[360px] xl:min-w-[360px] h-[206px] md:h-[245px] bg-white rounded-[20px] relative overflow-hidden shadow-sm border border-[#E9EDF7]"
         >
           <CardInfo card={card} variant="light" />
         </motion.div>

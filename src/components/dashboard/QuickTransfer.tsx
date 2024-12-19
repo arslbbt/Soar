@@ -3,6 +3,8 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { QuickTransferUser } from '../../types/dashboard'
 import Image from 'next/image'
+import toast from 'react-hot-toast';
+import Loader from '../shared/Loader';
 
 const users: QuickTransferUser[] = [
   { id: '1', name: 'Livia Bator', role: 'CEO', avatar: '/images/avatars/person-1.svg' },
@@ -18,6 +20,7 @@ export default function QuickTransfer(): React.JSX.Element {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [showLeftButton, setShowLeftButton] = useState(false)
   const [showRightButton, setShowRightButton] = useState(true)
+  const [isLoading, setIsLoading] = useState(false);
 
   const checkScroll = () => {
     const container = scrollContainerRef.current
@@ -64,6 +67,30 @@ export default function QuickTransfer(): React.JSX.Element {
       })
     }
   }
+
+  const handleTransfer = async () => {
+    if (!selectedUser) {
+      toast.error('Please select a recipient');
+      return;
+    }
+
+    if (!amount || isNaN(Number(amount))) {
+      toast.error('Please enter a valid amount');
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      toast.success('Transfer successful!');
+      setAmount('0.00');
+      setSelectedUser('');
+    } catch (error) {
+      toast.error('Transfer failed. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="">
@@ -131,9 +158,26 @@ export default function QuickTransfer(): React.JSX.Element {
               onChange={(e) => setAmount(e.target.value)}
               className="h-[50px] w-full rounded-full bg-[#F3F6FC] text-[#718EBF] text-base focus:outline-none focus:ring-0 pl-3"
             />
-            <button className="absolute right-0 flex items-center justify-center h-full w-32 bg-black rounded-full text-white font-medium">
-              Send
-              <Image src="/images/icons/send.svg" alt="send" width={20} height={20} className='ml-3'/>
+            <button 
+              disabled={isLoading}
+              className="absolute right-0 flex items-center justify-center h-full w-32 
+              bg-black rounded-full text-white font-medium 
+              hover:bg-gray-800 active:bg-gray-900 
+              transform active:scale-95 transition-all duration-200 
+              focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900
+              disabled:opacity-50 disabled:cursor-not-allowed"
+              onClick={handleTransfer}
+            >
+              {isLoading ? (
+                <div className="flex items-center">
+                  <Loader size="md" color="white" />
+                </div>
+              ) : (
+                <>
+                  <span>Send</span>
+                  <Image src="/images/icons/send.svg" alt="send" width={20} height={20} className='ml-3'/>
+                </>
+              )}
             </button>
           </div>
         </div>

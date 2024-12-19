@@ -5,6 +5,10 @@ import Image from 'next/image'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import Input from '@/components/ui/Input'
 import { cn } from '@/utils/cn'
+import toast from 'react-hot-toast'
+import Loader from '@/components/shared/Loader'
+import { useYupForm } from '@/hooks/useYupForm'
+import { settingsSchema, type SettingsFormData } from '@/schemas/settingsValidation'
 
 const tabs = [
   { id: 'edit', label: 'Edit Profile' },
@@ -14,17 +18,40 @@ const tabs = [
 
 export default function SettingsPage(): React.JSX.Element {
   const [activeTab, setActiveTab] = useState('edit')
-  const [formData, setFormData] = useState({
-    name: 'Charlene Reed',
-    username: 'Charlene Reed',
-    email: 'charlenereed@gmail.com',
-    dob: '25 January 1990',
-    presentAddress: 'San Jose, California, USA',
-    permanentAddress: 'San Jose, California, USA',
-    postalCode: '45962',
-    city: 'San Jose',
-    country: 'USA'
-  })
+  const [isLoading, setIsLoading] = useState(false)
+
+  const { formData, errors, handleChange, validateForm } = useYupForm<SettingsFormData>(
+    settingsSchema,
+    {
+      name: 'Charlene Reed',
+      username: 'Charlene Reed',
+      email: 'charlenereed@gmail.com',
+      dob: '25 January 1990',
+      presentAddress: 'San Jose, California, USA',
+      permanentAddress: 'San Jose, California, USA',
+      postalCode: '45962',
+      city: 'San Jose',
+      country: 'USA'
+    }
+  )
+
+  const handleSave = async () => {
+    const isValid = await validateForm();
+    if (!isValid) {
+      toast.error('Please fix the form errors before saving');
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      toast.success('Settings saved successfully!');
+    } catch (error) {
+      toast.error('Failed to save settings. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <DashboardLayout>
@@ -77,18 +104,21 @@ export default function SettingsPage(): React.JSX.Element {
                   <Input
                     label="Your Name"
                     value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    error={errors.name}
+                    onChange={(e) => handleChange('name', e.target.value)}
                   />
                   <Input
                     label="User Name"
                     value={formData.username}
-                    onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                    error={errors.username}
+                    onChange={(e) => handleChange('username', e.target.value)}
                   />
                   <Input
                     label="Email"
                     type="email"
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    error={errors.email}
+                    onChange={(e) => handleChange('email', e.target.value)}
                   />
                   <Input
                     label="Password"
@@ -99,39 +129,60 @@ export default function SettingsPage(): React.JSX.Element {
                   <Input
                     label="Date of Birth"
                     value={formData.dob}
-                    onChange={(e) => setFormData({ ...formData, dob: e.target.value })}
+                    error={errors.dob}
+                    onChange={(e) => handleChange('dob', e.target.value)}
                   />
                   <Input
                     label="Present Address"
                     value={formData.presentAddress}
-                    onChange={(e) => setFormData({ ...formData, presentAddress: e.target.value })}
+                    error={errors.presentAddress}
+                    onChange={(e) => handleChange('presentAddress', e.target.value)}
                   />
                   <Input
                     label="Permanent Address"
                     value={formData.permanentAddress}
-                    onChange={(e) => setFormData({ ...formData, permanentAddress: e.target.value })}
+                    error={errors.permanentAddress}
+                    onChange={(e) => handleChange('permanentAddress', e.target.value)}
                   />
                   <Input
                     label="City"
                     value={formData.city}
-                    onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                    error={errors.city}
+                    onChange={(e) => handleChange('city', e.target.value)}
                   />
                   <Input
                     label="Postal Code"
                     value={formData.postalCode}
-                    onChange={(e) => setFormData({ ...formData, postalCode: e.target.value })}
+                    error={errors.postalCode}
+                    onChange={(e) => handleChange('postalCode', e.target.value)}
                   />
                   <Input
                     label="Country"
                     value={formData.country}
-                    onChange={(e) => setFormData({ ...formData, country: e.target.value })}
+                    error={errors.country}
+                    onChange={(e) => handleChange('country', e.target.value)}
                   />
                 </div>
 
                 {/* Save Button */}
                 <div className="mt-8 flex justify-end">
-                  <button className="w-full md:w-auto px-16 py-3 bg-black text-white rounded-2xl font-medium">
-                    Save
+                  <button 
+                    disabled={isLoading}
+                    className="w-full md:w-auto px-16 py-3 bg-black text-white rounded-2xl font-medium
+                    hover:bg-gray-800 active:bg-gray-900 transform active:scale-95 
+                    transition-all duration-200 focus:outline-none focus:ring-2 
+                    focus:ring-offset-2 focus:ring-gray-900 disabled:opacity-50 
+                    disabled:cursor-not-allowed"
+                    onClick={handleSave}
+                  >
+                    {isLoading ? (
+                      <div className="flex items-center space-x-2">
+                        <Loader size="sm" color="white" />
+                        <span>Saving...</span>
+                      </div>
+                    ) : (
+                      'Save'
+                    )}
                   </button>
                 </div>
               </div>
