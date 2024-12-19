@@ -131,7 +131,7 @@ export default function QuickTransfer(): React.JSX.Element {
         {showLeftButton && (
           <button 
             onClick={scrollToPrev}
-            className="absolute left-0 top-[40%] transform -translate-y-1/2 bg-white shadow-lg rounded-full p-5 items-center z-10 hover:bg-gray-50 transition-colors"
+            className="absolute left-0 top-[40%] transform -translate-y-1/2 bg-white shadow-lg rounded-full p-4 items-center z-10 hover:bg-gray-50 transition-colors"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
