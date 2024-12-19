@@ -5,14 +5,14 @@ interface ValidationErrors {
   [key: string]: string;
 }
 
-export function useYupForm<T extends Record<string, any>>(
-  schema: ObjectSchema<any>,
+export function useYupForm<T extends Record<string, unknown>>(
+  schema: ObjectSchema<T>,
   initialData: T
 ) {
   const [formData, setFormData] = useState<T>(initialData);
   const [errors, setErrors] = useState<ValidationErrors>({});
 
-  const validateField = useCallback(async (name: keyof T, value: any) => {
+  const validateField = useCallback(async (name: keyof T, value: unknown) => {
     try {
       await schema.validateAt(name as string, { [name]: value });
       setErrors(prev => ({ ...prev, [name]: '' }));
@@ -25,7 +25,7 @@ export function useYupForm<T extends Record<string, any>>(
     }
   }, [schema]);
 
-  const handleChange = useCallback(async (name: keyof T, value: any) => {
+  const handleChange = useCallback(async (name: keyof T, value: unknown) => {
     setFormData(prev => ({ ...prev, [name]: value }));
     await validateField(name, value);
   }, [validateField]);

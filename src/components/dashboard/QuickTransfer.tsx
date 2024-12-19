@@ -86,6 +86,7 @@ export default function QuickTransfer(): React.JSX.Element {
       setAmount('0.00');
       setSelectedUser('');
     } catch (error) {
+      console.error(error);
       toast.error('Transfer failed. Please try again.');
     } finally {
       setIsLoading(false);

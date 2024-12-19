@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState } from 'react'
-import Image from 'next/image'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import Input from '@/components/ui/Input'
 import { cn } from '@/utils/cn'
@@ -49,6 +48,7 @@ export default function SettingsPage(): React.JSX.Element {
       await new Promise(resolve => setTimeout(resolve, 1500));
       toast.success('Settings saved successfully!');
     } catch (error) {
+      console.error(error);
       toast.error('Failed to save settings. Please try again.');
     } finally {
       setIsLoading(false);
@@ -63,6 +63,7 @@ export default function SettingsPage(): React.JSX.Element {
       setProfileImage(imageUrl);
       toast.success('Profile picture updated successfully!');
     } catch (error) {
+      console.error(error);
       toast.error('Failed to update profile picture');
     }
   };
